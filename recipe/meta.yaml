@@ -25,10 +25,8 @@ requirements:
     - python
     - matplotlib-base
     - numpy
-    - opencv
+    - py-opencv
     - scipy
-    - gstreamer >=1.14.0,<1.15.0a  # [not (win or ppc64le)]
-    - gstreamer >=1.18.5,<1.19.0a  # [win]
 
 test:
   requires:
