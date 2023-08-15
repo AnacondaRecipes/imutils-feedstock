@@ -1,44 +1,59 @@
 {% set version = "0.5.4" %}
+{% set name = "imutils" %}
 
 package:
-  name: imutils
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/i/imutils/imutils-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 03827a9fca8b5c540305c0844a62591cf35a0caec199cb0f2f0a4a0fb15d8f24
 
 build:
-  number: 3
-  script: '{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv '
+  number: 0
+  # No opencv on linux-s390x
+  skip: true  # [linux and s390x]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv 
 
 requirements:
   host:
     - pip
+    - setuptools
+    - wheel
     - python
   run:
     - python
     - matplotlib-base
     - numpy
-    - opencv
+    - py-opencv
     - scipy
 
 test:
+  requires:
+    - pip
   imports:
     - imutils
     - imutils.face_utils
     - imutils.feature
     - imutils.io
     - imutils.video
+  commands:
+    - pip check
 
 about:
-  home: https://github.com/jrosebr1/imutils
+  home: https://pyimagesearch.com
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
-  summary: A series of convenience functions to make basic image processing functions such as translation, rotation, resizing, skeletonization, displaying Matplotlib images, sorting contours, detecting edges, and much more easier with OpenCV and both Python 2.7 and Python 3.
-  doc_url: https://github.com/jrosebr1/imutils
-  dev_url: https://github.com/jrosebr1/imutils
+  summary: |
+    A series of convenience functions to make basic image processing operations such as translation, 
+    rotation, resizing, skeletonization, and displaying Matplotlib images easier with OpenCV and Python.
+  description: |
+    A series of convenience functions to make basic image processing functions such as 
+    translation, rotation, resizing, skeletonization, displaying Matplotlib images,
+    sorting contours, detecting edges, and much more easier with OpenCV and both Python 2.7 and Python 3.
+  doc_url: https://github.com/PyImageSearch/imutils/blob/master/README.md
+  dev_url: https://github.com/PyImageSearch/imutils
 
 extra:
   recipe-maintainers:
