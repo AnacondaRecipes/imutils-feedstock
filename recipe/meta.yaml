@@ -13,7 +13,7 @@ build:
   number: 0
   # No opencv on linux-s390x
   skip: true  # [linux and s390x]
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-build-isolation -vv 
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv 
 
 requirements:
   host:
@@ -41,7 +41,7 @@ test:
     - pip check
 
 about:
-  home: https://github.com/PyImageSearch/imutils
+  home: https://pyimagesearch.com
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
